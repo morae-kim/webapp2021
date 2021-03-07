@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./profile.module.css";
-import FollowButton from "../../Buttons/followButton/followButton";
+import FollowButton from "../../../Buttons/followButton/followButton";
 
 function Profile({ name, url, review_count }) {
   return (

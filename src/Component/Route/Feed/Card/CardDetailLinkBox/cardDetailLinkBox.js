@@ -17,7 +17,7 @@ function CardDetailLinkBox({ id, storeName, storeAddress }) {
           className={`${style.like_img}`}
         />
 
-        <span className={`${style.like_word}`}>{"좋아요"}</span>
+        <div className={`${style.like_word}`}>{"좋아요"}</div>
       </div>
     </div>
   );
