@@ -13,18 +13,18 @@ import Map from "./Map/map";
 function BodyRouter() {
   return (
     <Router>
-      <div className={`${style.router}`}>
+      <div id="router" className={`${style.router}`}>
         <NavLink
           to="/feed"
           className={`${style.link}`}
-          activeStyle={{ color: "black", fontWeight: "bolder" }}
+          activeClassName={`${style.active_link}`}
         >
           피드
         </NavLink>
         <NavLink
           to="/map"
           className={`${style.link}`}
-          activeStyle={{ color: "black", fontWeight: "bolder" }}
+          activeClassName={`${style.active_link}`}
         >
           지도
         </NavLink>
