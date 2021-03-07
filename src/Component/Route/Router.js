@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   NavLink,
+  Redirect,
 } from "react-router-dom";
 import style from "./Router.module.css";
 import Feed from "./Feed/feed";
@@ -14,18 +15,18 @@ function BodyRouter() {
     <Router>
       <div className={`${style.router}`}>
         <NavLink
-          to="/"
+          to="/feed"
           className={`${style.link}`}
-          activeClassName={`${style.active_link}`}
+          activeStyle={{ color: "black", fontWeight: "bolder" }}
         >
           피드
         </NavLink>
         <NavLink
           to="/map"
           className={`${style.link}`}
-          activeClassName={`${style.active_link}`}
+          activeStyle={{ color: "black", fontWeight: "bolder" }}
         >
-          맵
+          지도
         </NavLink>
       </div>
       <Switch>
@@ -35,9 +36,11 @@ function BodyRouter() {
         <Route path="/map">
           <Map />
         </Route>
+
         <Route exact path="/">
           <Feed />
         </Route>
+        <Redirect from="*" to="/" />
       </Switch>
     </Router>
   );
