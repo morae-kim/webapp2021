@@ -10,7 +10,7 @@ import style from "./Router.module.css";
 import Feed from "./Feed/feed";
 import Map from "./Map/map";
 
-function BodyRouter() {
+function BodyRouter({ resetGeoLocation }) {
   return (
     <Router>
       <div id="router" className={`${style.router}`}>
@@ -28,6 +28,11 @@ function BodyRouter() {
         >
           지도
         </NavLink>
+      </div>
+      <div className={`${style.get_location_container}`}>
+        <div className={`${style.get_location}`}>
+          <button onClick={resetGeoLocation}>버튼</button>
+        </div>
       </div>
       <Switch>
         <Route path="/feed">
