@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -9,8 +9,11 @@ import {
 import style from "./Router.module.css";
 import Feed from "./Feed/feed";
 import Map from "./Map/map";
+import { GeoContext } from "../../App";
 
 function BodyRouter({ resetGeoLocation }) {
+  const geo = useContext(GeoContext);
+
   return (
     <Router>
       <div id="router" className={`${style.router}`}>
@@ -31,7 +34,7 @@ function BodyRouter({ resetGeoLocation }) {
       </div>
       <div className={`${style.get_location_container}`}>
         <div className={`${style.get_location}`}>
-          <button onClick={resetGeoLocation}>버튼</button>
+          <button onClick={geo.setGeoLocation}>버튼</button>
         </div>
       </div>
       <Switch>

@@ -1,17 +1,16 @@
-import { useCallback } from "react";
-import { UserDispatch } from "../App";
-
-function getGeoLocation() {
+export default function getGeoLoca() {
+  const obj = {
+    latitude: 0,
+    longitude: 0,
+  };
   if ("geolocation" in navigator) {
     navigator.geolocation.getCurrentPosition((position) => {
-      return {
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude,
-      };
+      obj.latitude = position.coords.latitude;
+      obj.longitude = position.coords.longitude;
     });
   } else {
+    console.log("위치 정보 사용 불가능");
     alert("위치 정보 사용 불가능");
   }
+  return obj;
 }
-
-export default getGeoLocation;

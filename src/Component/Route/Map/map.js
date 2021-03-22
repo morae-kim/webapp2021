@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { RenderAfterNavermapsLoaded, NaverMap, Marker } from "react-naver-maps"; // 패키지 불러오기
+import { GeoContext } from "../../../App";
 
 function Map() {
+  const geo = useContext(GeoContext);
+  console.log(geo);
   const scroll = () => {
     let location = document.querySelector("#router").offsetTop;
     window.scrollTo({ top: location, behavior: "smooth" });
@@ -19,12 +22,23 @@ function Map() {
           width: "100%", // 네이버지도 가로 길이
           height: "90vh", // 네이버지도 세로 길이
         }}
-        defaultCenter={{ lat: 37.554722, lng: 126.970833 }} // 지도 초기 위치
-        defaultZoom={13} // 지도 초기 확대 배율
+        defaultCenter={{
+          lat: geo.geoLocation.latitude,
+          lng: geo.geoLocation.longitude,
+        }} // 지도 초기 위치
+        defaultZoom={15} // 지도 초기 확대 배율 => 해
         onMouseover={scroll}
       >
-        <Marker position={{ lat: 37.3595704, lng: 127.105399 }} />
+        {/* <Marker
+          position={{
+            lat: geo.geoLocation.latitude,
+            lng: geo.geoLocation.longitude,
+          }}
+        /> */}
       </NaverMap>
+      {/* TODO
+        백엔드 배열 가져와서 마커 설정 => 마커 이미지 수정
+      */}
     </RenderAfterNavermapsLoaded>
   );
 }

@@ -1,24 +1,30 @@
 import React, { useState } from "react";
 import Header from "./Component/Header/header";
 import BodyRouter from "./Component/Route/Router";
-import getGeoLocation from "./util/getGeoLocation";
+import getGeoLoca from "./util/getGeoLocation";
 
-export const UserContext = React.createContext({
-  geo: null,
-  setGeo: () => {},
-});
+export const GeoContext = React.createContext();
 
 function App() {
-  const [geoLocation, setGeoLocation] = useState(getGeoLocation());
+  let geoLocaInit = getGeoLoca();
+
+  const [geoLocation, setGeoLocation] = useState(geoLocaInit);
   const resetGeoLocation = () => {
     // data fetch again
-    setGeoLocation(getGeoLocation());
+    setGeoLocation(getGeoLoca());
   };
+  const geoObject = {
+    geoLocation: geoLocation,
+    setGeoLocation: () => {
+      resetGeoLocation();
+    },
+  };
+
   return (
-    <UserContext.Provider value={geoLocation}>
+    <GeoContext.Provider value={geoObject}>
       <Header />
-      <BodyRouter resetGeoLocation={resetGeoLocation} />
-    </UserContext.Provider>
+      <BodyRouter />
+    </GeoContext.Provider>
   );
 }
 
