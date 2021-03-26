@@ -18,6 +18,9 @@ function App() {
     setGeoLocation: () => {
       resetGeoLocation();
     },
+    setCustomGeoLocation: ({ latitude, longitude }) => {
+      setGeoLocation({ latitude: latitude, longitude: longitude });
+    },
   };
 
   return (

@@ -14,21 +14,11 @@ import "./marker.css";
 
 function Map() {
   const geo = useContext(GeoContext);
-
-  // if (typeof window.naver != undefined) {
-  //   getNaver();
-  // }
-
+  const [zoomState, setZoomState] = useState();
   const scroll = () => {
     let location = document.querySelector("#router").offsetTop;
     window.scrollTo({ top: location, behavior: "smooth" });
   };
-
-  // const icon = {
-  //   content: ['<div class="cs_mapbridge">', "hello", "</div>"].join(""),
-  //   size: new navermaps.Size(38, 58),
-  //   anchor: new navermaps.Point(19, 58),
-  // };
 
   return (
     <RenderAfterNavermapsLoaded
@@ -36,6 +26,10 @@ function Map() {
       error={<p>Maps Load Error</p>}
       loading={<p>Maps Loading...</p>}
     >
+      {/* TODO 
+  현재 설정된 좌표에서 줌을 콜백받아, 줌에 
+*/}
+
       <NaverMap
         mapDivId={"react-naver-map"} // default: react-nave
         p
@@ -49,7 +43,10 @@ function Map() {
         }} // 지도 초기 위치
         defaultZoom={15} // 지도 초기 확대 배율 => 해
         onMouseover={scroll}
-        onZoomChanged={() => console.log("change")}
+        onZoomChanged={(zoom) => console.log(zoom)}
+        onCenterChanged={(center) =>
+          geo.setCustomGeoLocation(center.x, center.y)
+        }
       >
         {storeData.stores.map((store) => (
           <Marker
