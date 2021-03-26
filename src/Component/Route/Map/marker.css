@@ -1,0 +1,22 @@
+.marker {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  max-width: 150px;
+  height: auto;
+  text-align: center;
+  padding: 5px;
+  background-color: #b1cbbb;
+  opacity: 0.7;
+  border-radius: 10px;
+  font-family: SpoqaHanSans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 20px;
+  color: black;
+  /* identical to box height */
+
+  text-transform: capitalize;
+}

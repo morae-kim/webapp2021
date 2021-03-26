@@ -1,14 +1,34 @@
 import React, { useState, useContext } from "react";
-import { RenderAfterNavermapsLoaded, NaverMap, Marker } from "react-naver-maps"; // 패키지 불러오기
+import {
+  RenderAfterNavermapsLoaded,
+  NaverMap,
+  Marker,
+  Rectangle,
+} from "react-naver-maps"; // 패키지 불러오기
+import { withNavermaps } from "react-naver-maps/dist/hocs-018c38ad";
 import { GeoContext } from "../../../App";
+import MarkerDetail from "./marker";
+import storeData from "../../../test_data/store_data.json";
+import styles from "./map.module.css";
+import "./marker.css";
 
 function Map() {
   const geo = useContext(GeoContext);
-  console.log(geo);
+
+  // if (typeof window.naver != undefined) {
+  //   getNaver();
+  // }
+
   const scroll = () => {
     let location = document.querySelector("#router").offsetTop;
     window.scrollTo({ top: location, behavior: "smooth" });
   };
+
+  // const icon = {
+  //   content: ['<div class="cs_mapbridge">', "hello", "</div>"].join(""),
+  //   size: new navermaps.Size(38, 58),
+  //   anchor: new navermaps.Point(19, 58),
+  // };
 
   return (
     <RenderAfterNavermapsLoaded
@@ -17,10 +37,11 @@ function Map() {
       loading={<p>Maps Loading...</p>}
     >
       <NaverMap
-        mapDivId={"react-naver-map"} // default: react-naver-map
+        mapDivId={"react-naver-map"} // default: react-nave
+        p
         style={{
           width: "100%", // 네이버지도 가로 길이
-          height: "90vh", // 네이버지도 세로 길이
+          height: "85vh", // 네이버지도 세로 길이
         }}
         defaultCenter={{
           lat: geo.geoLocation.latitude,
@@ -28,7 +49,26 @@ function Map() {
         }} // 지도 초기 위치
         defaultZoom={15} // 지도 초기 확대 배율 => 해
         onMouseover={scroll}
+        onZoomChanged={() => console.log("change")}
       >
+        {storeData.stores.map((store) => (
+          <Marker
+            key={store.store_id}
+            position={{ lat: store.latitude, lng: store.longitude }}
+            animation={2}
+            icon={{
+              content: [
+                '<div class="cs_mapbridge">',
+                "<div class='marker'>",
+                `${store.store_name}`,
+                "</div>",
+                "</div>",
+              ].join(""),
+            }}
+            onClick={() => alert("hello")}
+          />
+        ))}
+
         {/* <Marker
           position={{
             lat: geo.geoLocation.latitude,
