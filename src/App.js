@@ -18,7 +18,8 @@ function App() {
     setGeoLocation: () => {
       resetGeoLocation();
     },
-    setCustomGeoLocation: ({ latitude, longitude }) => {
+    setCustomGeoLocation: (distance, latitude, longitude) => {
+      console.log(distance);
       setGeoLocation({ latitude: latitude, longitude: longitude });
       //data fetch again
     },
