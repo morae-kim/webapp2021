@@ -14,7 +14,7 @@ import "./marker.css";
 
 function Map() {
   const geo = useContext(GeoContext);
-  const [zoomState, setZoomState] = useState();
+  const [zoomState, setZoomState] = useState(15);
   const scroll = () => {
     let location = document.querySelector("#router").offsetTop;
     window.scrollTo({ top: location, behavior: "smooth" });
@@ -26,10 +26,6 @@ function Map() {
       error={<p>Maps Load Error</p>}
       loading={<p>Maps Loading...</p>}
     >
-      {/* TODO 
-  현재 설정된 좌표에서 줌을 콜백받아, 줌에 
-*/}
-
       <NaverMap
         mapDivId={"react-naver-map"} // default: react-nave
         p
@@ -43,7 +39,7 @@ function Map() {
         }} // 지도 초기 위치
         defaultZoom={15} // 지도 초기 확대 배율 => 해
         onMouseover={scroll}
-        onZoomChanged={(zoom) => console.log(zoom)}
+        onZoomChanged={(zoom) => setZoomState(zoom)}
         onCenterChanged={(center) =>
           geo.setCustomGeoLocation(center.x, center.y)
         }
@@ -54,28 +50,21 @@ function Map() {
             position={{ lat: store.latitude, lng: store.longitude }}
             animation={2}
             icon={{
-              content: [
-                '<div class="cs_mapbridge">',
-                "<div class='marker'>",
-                `${store.store_name}`,
-                "</div>",
-                "</div>",
-              ].join(""),
+              content:
+                zoomState >= 14
+                  ? [
+                      '<div class="cs_mapbridge">',
+                      "<div class='marker'>",
+                      `${store.store_name}`,
+                      "</div>",
+                      "</div>",
+                    ].join("")
+                  : "<div class='zoom-out-marker'></div>",
             }}
             onClick={() => alert("hello")}
           />
         ))}
-
-        {/* <Marker
-          position={{
-            lat: geo.geoLocation.latitude,
-            lng: geo.geoLocation.longitude,
-          }}
-        /> */}
       </NaverMap>
-      {/* TODO
-        백엔드 배열 가져와서 마커 설정 => 마커 이미지 수정
-      */}
     </RenderAfterNavermapsLoaded>
   );
 }

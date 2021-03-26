@@ -20,6 +20,7 @@ function App() {
     },
     setCustomGeoLocation: ({ latitude, longitude }) => {
       setGeoLocation({ latitude: latitude, longitude: longitude });
+      //data fetch again
     },
   };
 
