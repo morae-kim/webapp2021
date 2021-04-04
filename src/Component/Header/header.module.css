@@ -44,3 +44,12 @@
   justify-content: center;
   margin-top: 15px;
 }
+.todayfood {
+  width: 100%;
+  height: 40px;
+  color: white;
+  padding: 10px;
+  font-weight: bolder;
+  font-size: 1.4rem;
+
+}
